@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
+import { NavbarComponent } from "../components/navbar/navbar.component";
+import { HeroPanelComponent } from "../components/hero-panel/hero-panel.component";
+import {ButtonComponent} from '../components/atoms/button/button.component';
+import {HeroPanelService} from '../components/hero-panel/hero-panel.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
+  declarations: [AppComponent, NavbarComponent, HeroPanelComponent, ButtonComponent],
+  imports: [BrowserModule],
+  providers: [HeroPanelService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

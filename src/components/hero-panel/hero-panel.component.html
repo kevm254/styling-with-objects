@@ -1,0 +1,38 @@
+<div [ngStyle]="heroPanelStyles.Container" class="hero-panel-container">
+
+<!-- Content Container -->
+  <div
+    [ngStyle]="heroPanelStyles.ContentContainer"
+    class="hero-panel-content-container"
+  >
+    <div
+    [ngStyle]="heroPanelStyles.ContentHeader">Header</div>
+    <div [ngStyle]="heroPanelStyles.ContentBody">{{ bodyText }}</div>
+
+  </div>
+<!--  END Content Container -->
+</div>
+
+<!-- EDITOR MODE-->
+<div *ngIf="colors">
+  <label>Container</label>
+  <select #containerColorSelect (change)="updateColor(containerColorSelect.value, 'container')">
+    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+  </select>
+</div>
+
+<div *ngIf="colors">
+  <label>Content Container</label>
+  <select #contentContainerColorSelect (change)="updateColor(contentContainerColorSelect.value, 'content-container')">
+    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+  </select>
+</div>
+
+
+<div *ngIf="colors">
+  <label>Top</label>
+  <input #contentContainerTop type="number" (keyup)="updateTopPos(contentContainerTop.value)">
+  <label>Left</label> s
+  <input #contentContainerLeft type="number" (change)="updateLeftPos(contentContainerLeft.value)">
+</div>
+

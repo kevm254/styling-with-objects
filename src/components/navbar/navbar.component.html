@@ -1,0 +1,12 @@
+<nav class="nav-container" [ngStyle]="NavbarStyle.Container">
+  <div class="navbar-brand" [ngStyle]="NavbarStyle.Brand"></div>
+
+  <ul class="navbar-items" [ngStyle]="NavbarStyle.Items.Container">
+    <li
+      *ngFor="let item of navbarItems;"
+      [ngStyle]="NavbarStyle.Items.MenuItem"
+    >
+      {{ item.name }}
+    </li>
+  </ul>
+</nav>
