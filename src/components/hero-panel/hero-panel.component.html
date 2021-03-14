@@ -6,33 +6,57 @@
     class="hero-panel-content-container"
   >
     <div
-    [ngStyle]="heroPanelStyles.ContentHeader">Header</div>
+    [ngStyle]="heroPanelStyles.ContentHeader">{{ headerText }}</div>
     <div [ngStyle]="heroPanelStyles.ContentBody">{{ bodyText }}</div>
 
   </div>
 <!--  END Content Container -->
 </div>
 
-<!-- EDITOR MODE-->
-<div *ngIf="colors">
-  <label>Container</label>
-  <select #containerColorSelect (change)="updateColor(containerColorSelect.value, 'container')">
-    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
-  </select>
+
+<div
+  (click)="toggleDebugMenu()"
+  [ngStyle]="heroPanelStyles.DebugContainer.Icon">
+  []
 </div>
 
-<div *ngIf="colors">
-  <label>Content Container</label>
-  <select #contentContainerColorSelect (change)="updateColor(contentContainerColorSelect.value, 'content-container')">
-    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
-  </select>
-</div>
+<div *ngIf="showDebugMenu()"
+     (mousedown)="moveMenu()"
+     [ngStyle]="heroPanelStyles.DebugContainer">
 
+  <!-- EDITOR MODE-->
+  <div>
+    <label>Palette</label>
+    <textarea #paletteOptions (keyup)="updatePalette(paletteOptions.value)">{{ palette | json }}</textarea>
+  </div>
 
-<div *ngIf="colors">
+  <div *ngIf="colors">
+    <label>Container</label>
+    <select #containerColorSelect (change)="updateColor(containerColorSelect.value, 'container')">
+      <option *ngFor="let paletteOption of palette" [value]="paletteOption.value">{{ paletteOption.name }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="colors">
+    <label>Content Container</label>
+    <select #contentContainerColorSelect (change)="updateColor(contentContainerColorSelect.value, 'content-container')">
+      <option *ngFor="let paletteOption of palette" [value]="paletteOption.value">{{ paletteOption.name }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Content Header Text</label>
+    <input #headerText (change)="updateHeaderText(headerText.value)" [value]="headerText.value">
+  </div>
+
+  <div>
+    <label>Content Container Text</label>
+    <input #bodyText (change)="updateBodyText(bodyText.value)" [value]="bodyText.value">
+  </div>
+
   <label>Top</label>
-  <input #contentContainerTop type="number" (keyup)="updateTopPos(contentContainerTop.value)">
-  <label>Left</label> s
-  <input #contentContainerLeft type="number" (change)="updateLeftPos(contentContainerLeft.value)">
+  <input #contentContainerTop [value]="heroPanelStyles.ContentContainer.left" type="number" (keyup)="updateTopPos(contentContainerTop.value)">
+  <label>Left</label>
+  <input #contentContainerLeft type="number" (keyup)="updateLeftPos(contentContainerLeft.value)">
 </div>
 

@@ -1,52 +1,30 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import {NavbarService} from './navbar.service';
+import {NavbarStyles} from './navbar.styles';
 
 @Component({
-  selector: "navbar-cmp",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  selector: 'navbar-cmp',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  navbarItems = [
-    {
-      name: "About",
-      url: "/about"
-    },
-    {
-      name: "Test",
-      url: "/test"
-    }
-  ];
+  navbarItems;
+  navbarStyles;
 
-  NavbarStyle = {
-    Container: {
-      display: "flex",
-      backgroundColor: "blue",
-      height: "50px",
-      width: "100%",
-      color: "white",
-      justifyContent: "space-between",
-      overflow: "hidden"
-    },
+  constructor(private navbarService: NavbarService) {
+  }
 
-    Brand: {
-      backgroundColor: "orange",
-      width: "80px",
-      height: "50px"
-    },
+  ngOnInit() {
+    this.fetchData();
+    this.fetchStyles();
+  }
 
-    Items: {
-      Container: {
-        display: "flex",
-        listStyle: "none",
-        overflow: "hidden",
-        // width: "80px",
-        height: "50px",
-        backgroundColor: "red",
-        paddingTop: "10px"
-      },
-      MenuItem: {
-        padding: "5px"
-      }
-    }
-  };
+  fetchData() {
+    this.navbarItems = this.navbarService.getNavbarItems();
+  }
+
+  fetchStyles() {
+    this.navbarStyles = NavbarStyles;
+  }
 }
+
